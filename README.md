@@ -1,14 +1,11 @@
-# Laboratory Activity 9: Your Own Table, Your Own Model
+# G1: Which column did you turn into a table, and why that one?
 
-## F1. Which column did you make nullable, and why that one?
-[Your answer. Example: I made notes nullable because not every movie needs a note, so it can be left empty. The other columns are required for every movie.]
+I turned the `genre` column into a `genres` table. Genre comes from a fixed list (Action, Adventure, Drama), the same values repeat across many movies, and a genre could later need its own details such as a description. The `year` column is not a good candidate because a year is just a value, not a thing with its own details.
 
-## F2. Which step failed first for you, and what did the error say?
-[Your answer. Example: The first failure was the database file. Running migrate gave "file is not a database", so I recreated database.sqlite. Later, creating a movie without $fillable gave a MassAssignmentException naming the title column.]
+# G2: What number did screenshot 6 show, and why exactly that number?
 
-## F3. You changed no Blade file in Part D, yet your pages still work. Why not?
-[Your answer. Example: The view loops over $movies and reads fields like $movie['name']. Eloquent models can be read like arrays, and the controller now passes model records with those same field names, so the view works without changes.]
+Screenshot 6 showed 6 queries. The first query loads all five movies, and then Laravel runs one more query for each movie to load its genre, which is 5 more queries, for a total of 6.
 
-## Notes on how I completed this activity
-- Screenshot 3 was reproduced: I had already added $fillable before the first attempt. I commented it out temporarily, captured the MassAssignmentException, and restored it.
-- I changed the column names from title/director/release_year to name/genre/year so the table matches the fields the existing view uses. This happened after screenshots 1 and 2 were taken.
+# G3: What would break if the belongsTo method were plural?
+
+If `belongsTo` were named `genres()` instead of `genre()`, the view call `$movie->genre->name` would fail with an undefined relationship error, and `with('genre')` would also fail. Eloquent takes the method name, adds `_id`, and looks for a `genres_id` column, which does not exist, since the column on the movies table is `genre_id`.

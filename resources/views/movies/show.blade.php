@@ -36,7 +36,7 @@
 
     <div class="detail-card">
         <div class="detail-header">Title: {{ $movie['name'] }}</div>
-        <div class="detail-row">Genre: {{ $movie['genre'] }}</div>
+        <div class="detail-row">Genre:{{ $movie->genre->name }}</div>
         <div class="detail-row">Year: {{ $movie['year'] }}</div>
     </div>
 

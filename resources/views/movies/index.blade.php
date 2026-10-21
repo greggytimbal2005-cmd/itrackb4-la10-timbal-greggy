@@ -32,7 +32,7 @@
 </head>
 <body>
     <h1>Movie Flex</h1>
-    <p class="prepared-by">Prepared by: Your Name</p>
+    <p class="prepared-by">truly yours:Greggy F. Timbal</p>
 
     <div class="nav-buttons">
         <a href="{{ route('movies.index') }}">Movie List</a>
@@ -40,7 +40,11 @@
         <a href="{{ route('movies.filter', 'all') }}">Filter List</a>
     </div>
 
-    <h2>My Movie List</h2>
+    <h2>Movie list</h2>
+
+        <div class="nav-buttons" style="margin-bottom: 12px;">
+        <a href="{{ url('/movies/create') }}">+ Add Movie</a>
+    </div>
 
     <table>
         <thead>
@@ -48,7 +52,7 @@
                 <th>No.</th>
                 <th>Title</th>
                 <th>Genre</th>
-                <th>Year</th>
+                <th>Year</th>   
             </tr>
         </thead>
         <tbody>
@@ -60,11 +64,12 @@
                             {{ $movie['name'] }}
                         </a>
                     </td>
-                    <td>{{ $movie['genre'] }}</td>
+                    <td>{{ $movie->genre->name }}</td>
                     <td>{{ $movie['year'] }}</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    <p>Queries: {{ count(\Illuminate\Support\Facades\DB::getQueryLog()) }}</p>
 </body>
 </html>

@@ -87,46 +87,12 @@
 
                     </label>
 
-                    <select
-                        id="genre"
-                        name="genre"
-                        class="form-select @error('genre') is-invalid @enderror"
-                    >
-
-                        <option value="">
-                            Select Genre
-                        </option>
-
-                        <option value="Action"
-                            @selected(old('genre') === 'Action')>
-                            Action
-                        </option>
-
-                        <option value="Comedy"
-                            @selected(old('genre') === 'Comedy')>
-                            Comedy
-                        </option>
-
-                        <option value="Drama"
-                            @selected(old('genre') === 'Drama')>
-                            Drama
-                        </option>
-
-                        <option value="Horror"
-                            @selected(old('genre') === 'Horror')>
-                            Horror
-                        </option>
-
-                        <option value="Romance"
-                            @selected(old('genre') === 'Romance')>
-                            Romance
-                        </option>
-
-                        <option value="Sci-Fi"
-                            @selected(old('genre') === 'Sci-Fi')>
-                            Sci-Fi
-                        </option>
-
+                    <select name="genre_id">
+                      @foreach ($genres as $genre)
+                      <option value="{{ $genre->id }}"
+                      @selected(old('genre_id') == $genre->id)
+                     >{{ $genre->name }}</option>
+                        @endforeach
                     </select>
 
 
