@@ -46,12 +46,10 @@ class MovieController extends Controller
         return redirect()->route('movies.index');
     }
 
-    public function show($id)
-    {
-        $movie = Movie::findOrFail($id);
-
-        return view('movies.show', compact('movie'));
-    }
+       public function show(Movie $movie)
+   {
+       return view('movies.show', compact('movie'));
+   }
 
     public function featured()
     {
@@ -62,4 +60,32 @@ class MovieController extends Controller
     {
         //
     }
+
+    public function edit(Movie $movie)
+    {
+      $genres = Genre::all(); 
+      return view('movies.edit', compact('movie', 'genres'));
+    } 
+
+    public function update(Request $request, Movie $movie)
+    {
+    $validated = $request->validate([
+    'name'        => 'required|string|max:255',
+    'genre_id'    => 'required|exists:genres,id',
+    'year'        => 'nullable|integer',
+    'is_favorite' => 'required|boolean',
+    'notes'       => 'nullable|string',
+  ]);
+
+     $movie->update($validated);
+
+     return redirect()->route('movies.index');
+    }
+
+    public function destroy(Movie $movie)
+{
+    $movie->delete();
+
+    return redirect()->route('movies.index');
+}
 }

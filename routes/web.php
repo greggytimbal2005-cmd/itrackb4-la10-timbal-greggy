@@ -16,10 +16,5 @@ Route::get('/movies/featured', [MovieController::class, 'featured'])
 Route::get('/movies/filter/{genre}', [MovieController::class, 'filter'])
     ->name('movies.filter');
 
-Route::resource('movies', MovieController::class)
-    ->only(['index', 'show', 'store'])
-    ->names([
-        'index' => 'movies.index',
-        'show' => 'movies.show',
-        'store' => 'movies.store',
-    ]);
+Route::resource('movies', MovieController::class);
+    

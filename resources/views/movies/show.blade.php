@@ -41,5 +41,11 @@
     </div>
 
     <a href="{{ route('movies.index') }}" class="btn">Back to List</a>
+    <form action="{{ route('movies.destroy', $movie) }}" method="POST"
+      onsubmit="return confirm('Delete this record?')" style="display:inline">
+    @csrf
+    @method('DELETE')
+    <button type="submit">Delete</button>
+</form>
 </body>
 </html>
